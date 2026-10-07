@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Nasi Cokot - Praktis, Gurih, Bikin Kenyang</title>
+<meta name="description" content="Nasi Cokot: nasi bulat siap santap isi ayam suwir bumbu gurih. Higienis, mudah dibawa, hanya Rp10.000. Pesan via WhatsApp.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Nasi Cokot - Praktis, Gurih, Bikin Kenyang">
+<meta property="og:description" content="Nasi bulat isi ayam suwir bumbu gurih. Siap santap, mudah dibawa, Rp10.000.">
+<meta property="og:locale" content="id_ID">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;800&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+/* ===== Warna & ukuran: ubah di sini ===== */
+:root{
+  --bg:#FFF4DC; --surface:#FFFFFF; --text:#4A2E1B; --muted:#7D6450;
+  --orange:#F08A24; --orange-d:#C96A0E; --yellow:#FFC83D; --green:#4F7F3A; --line:#F0DDB8;
+  --shadow:0 8px 24px rgba(120,70,20,.12);
+  --fd:'Baloo 2','Trebuchet MS',sans-serif; --fb:'Nunito','Segoe UI',sans-serif;
+  box-sizing:border-box; padding-top:env(safe-area-inset-top,0px); padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){--bg:#2A1B10;--surface:#3A261A;--text:#FBEBD0;--muted:#CDB394;--line:#5A3D28;--shadow:0 8px 24px rgba(0,0,0,.35)}
+}
+:root[data-theme="dark"]{--bg:#2A1B10;--surface:#3A261A;--text:#FBEBD0;--muted:#CDB394;--line:#5A3D28;--shadow:0 8px 24px rgba(0,0,0,.35)}
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:calc(env(safe-area-inset-top,0px) + 72px);height:100%}
+body{margin:0;background:var(--bg);color:var(--text);font:400 1.05rem/1.65 var(--fb);overflow-x:hidden}
+h1,h2,h3{font-family:var(--fd);line-height:1.15;margin:0}
+h2{font-size:clamp(1.9rem,5vw,2.6rem);font-weight:800}
+a{color:inherit}
+.wrap{max-width:1080px;margin:0 auto;padding:0 20px}
+section{padding:72px 0}
+.lead{color:var(--muted);max-width:56ch;margin:10px 0 36px}
+.center{text-align:center}.center .lead{margin-inline:auto}
+:focus-visible{outline:3px solid var(--green);outline-offset:3px}
+
+/* Navbar */
+nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:50;background:var(--bg);border-bottom:1px solid var(--line)}
+.nav-in{display:flex;align-items:center;justify-content:space-between;height:64px}
+.logo{font:800 1.5rem var(--fd);text-decoration:none;color:var(--orange-d)}
+.menu{display:none;list-style:none;margin:0;padding:0;gap:6px}
+.menu a{display:block;padding:8px 14px;border-radius:99px;text-decoration:none;font-weight:700}
+.menu a:hover{background:var(--line)}
+.burger{background:none;border:0;width:44px;height:44px;cursor:pointer;color:var(--text)}
+.burger span{display:block;width:24px;height:3px;margin:5px auto;background:currentColor;border-radius:3px;transition:.25s}
+.burger[aria-expanded=true] span:nth-child(1){transform:translateY(8px) rotate(45deg)}
+.burger[aria-expanded=true] span:nth-child(2){opacity:0}
+.burger[aria-expanded=true] span:nth-child(3){transform:translateY(-8px) rotate(-45deg)}
+.menu.open{display:flex;flex-direction:column;position:absolute;left:0;right:0;top:64px;background:var(--bg);padding:10px 20px 18px;border-bottom:1px solid var(--line);box-shadow:var(--shadow)}
+@media(min-width:768px){.burger{display:none}.menu{display:flex}}
+
+/* Tombol */
+.btn{display:inline-flex;align-items:center;gap:8px;padding:14px 26px;border-radius:99px;font:700 1.05rem var(--fb);text-decoration:none;border:2px solid var(--orange);cursor:pointer;transition:transform .2s,box-shadow .2s,background .2s}
+.btn:hover{transform:translateY(-3px);box-shadow:var(--shadow)}
+.btn-main{background:var(--orange);color:#fff}.btn-main:hover{background:var(--orange-d)}
+.btn-alt{background:transparent;color:var(--orange-d)}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]) .btn-alt{color:var(--yellow);border-color:var(--yellow)}}
+
+/* Hero */
+.hero{padding:40px 0 64px}
+.hero-grid{display:grid;gap:32px;align-items:center}
+.hero h1{font-size:clamp(2.5rem,9vw,4.4rem);font-weight:800}
+.hero p{color:var(--muted);font-size:1.15rem;max-width:44ch;margin:16px 0 28px}
+.cta{display:flex;flex-wrap:wrap;gap:12px}
+.hero-art{display:grid;place-items:center;background:radial-gradient(circle,var(--yellow) 0 55%,transparent 56%);aspect-ratio:1;max-width:420px;width:100%;margin:auto}
+.hero-art svg,.hero-art img{width:82%;height:auto;animation:float 4s ease-in-out infinite}
+@keyframes float{50%{transform:translateY(-12px) rotate(3deg)}}
+@media(min-width:800px){.hero-grid{grid-template-columns:1.1fr .9fr}}
+
+/* Kartu (dipakai Menu, Testimoni, Contact) */
+.card{background:var(--surface);border:1px solid var(--line);border-radius:24px;box-shadow:var(--shadow);transition:transform .25s,box-shadow .25s}
+.card:hover{transform:translateY(-6px)}
+.grid3{display:grid;gap:22px}
+@media(min-width:800px){.grid3{grid-template-columns:repeat(3,1fr)}}
+
+/* Menu */
+.dish{overflow:hidden;display:flex;flex-direction:column}
+.dish-img{display:grid;place-items:center;padding:22px;aspect-ratio:4/3}
+.dish-img svg,.dish-img img{width:62%;height:auto;max-height:100%;object-fit:cover}
+.dish-body{padding:22px;display:flex;flex-direction:column;gap:8px;flex:1}
+.dish h3{font-size:1.4rem}.dish p{margin:0;color:var(--muted);flex:1}
+.price{font:800 1.5rem var(--fd);color:var(--green)}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]) .price{color:#9CD07F}}
+.note{margin-top:28px;font-weight:700;color:var(--orange-d)}
+
+/* About */
+.about{background:var(--surface);border-block:1px solid var(--line)}
+.about-grid{display:grid;gap:36px;align-items:center}
+@media(min-width:800px){.about-grid{grid-template-columns:1fr 1fr}}
+.about-img{background:var(--yellow);border-radius:32px;padding:30px;display:grid;place-items:center}
+.about-img svg,.about-img img{width:70%;height:auto}
+.perks{list-style:none;margin:26px 0 0;padding:0;display:grid;gap:14px;grid-template-columns:1fr 1fr}
+.perks li{display:flex;gap:12px;align-items:center;font-weight:700;line-height:1.3}
+.ico{flex:none;width:46px;height:46px;border-radius:14px;background:var(--bg);display:grid;place-items:center;font-size:1.4rem}
+
+/* Testimoni: slider geser di mobile, 3 kolom di desktop */
+.slider{display:flex;gap:18px;overflow-x:auto;scroll-snap-type:x mandatory;padding:6px 4px 22px;-webkit-overflow-scrolling:touch}
+.slider>.card{flex:0 0 84%;scroll-snap-align:center}
+@media(min-width:800px){.slider{display:grid;grid-template-columns:repeat(3,1fr);overflow:visible}.slider>.card{flex:auto}}
+.testi{padding:26px}
+.quote{font:800 3.4rem/0.6 var(--fd);color:var(--orange)}
+.testi p{margin:10px 0 16px}
+.stars{color:var(--yellow);letter-spacing:3px;font-size:1.15rem}
+.who{font-weight:700;margin-top:4px}
+
+/* Contact */
+.contact-grid{display:grid;gap:22px}
+@media(min-width:800px){.contact-grid{grid-template-columns:1fr 1fr}}
+.ch{padding:26px;display:flex;flex-direction:column;gap:6px;align-items:flex-start}
+.ch h3{font-size:1.4rem}.ch p{margin:0 0 10px;color:var(--muted)}
+form.card{padding:26px;display:grid;gap:12px}
+label{font-weight:700}
+input,textarea{width:100%;padding:12px 14px;border-radius:14px;border:1.5px solid var(--line);background:var(--bg);color:var(--text);font:inherit}
+.contact-form-wrap{grid-column:1/-1}
+
+/* Footer */
+footer{background:var(--text);color:var(--bg);padding:36px 0;text-align:center}
+footer a{margin:0 10px;font-weight:700}
+footer p{margin:6px 0}
+
+/* WhatsApp mengambang */
+.wa-float{position:fixed;right:18px;bottom:calc(18px + env(safe-area-inset-bottom,0px));z-index:60;width:58px;height:58px;border-radius:50%;background:#25D366;display:grid;place-items:center;box-shadow:0 6px 18px rgba(0,0,0,.3);transition:transform .2s}
+.wa-float:hover{transform:scale(1.1)}
+.wa-float svg{width:32px;height:32px;fill:#fff}
+
+/* Animasi muncul saat scroll */
+.reveal{opacity:0;transform:translateY(26px);transition:opacity .7s ease,transform .7s ease}
+.reveal.in{opacity:1;transform:none}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.reveal{opacity:1;transform:none;transition:none}.hero-art svg{animation:none}}
+</style>
+</head>
+<body>
+
+<nav aria-label="Navigasi utama">
+  <div class="wrap nav-in">
+    <a href="#home" class="logo">Nasi Cokot</a>
+    <button class="burger" id="burger" aria-label="Buka menu" aria-expanded="false" aria-controls="menu"><span></span><span></span><span></span></button>
+    <ul class="menu" id="menu">
+      <li><a href="#home">Home</a></li>
+      <li><a href="#menu-section">Menu</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </div>
+</nav>
+
+<main>
+<!-- 1. HOME -->
+<section class="hero" id="home">
+  <div class="wrap hero-grid">
+    <div>
+      <h1>Praktis, Gurih, Bikin Kenyang!</h1>
+      <p>Nasi bulat isi ayam suwir bumbu gurih. Siap santap, mudah dibawa, cocok buat kamu yang sibuk.</p>
+      <div class="cta">
+        <a class="btn btn-main" data-wa="Halo, saya mau pesan Nasi Cokot" href="#" target="_blank" rel="noopener">Pesan via WhatsApp</a>
+        <a class="btn btn-alt" href="#menu-section">Lihat Menu</a>
+      </div>
+    </div>
+    <!-- GANTI gambar hero: isi CONFIG.heroImage dengan URL/data foto asli -->
+    <div class="hero-art" id="heroArt" role="img" aria-label="Nasi Cokot berbentuk bulat isi ayam suwir"></div>
+  </div>
+</section>
+
+<!-- 2. MENU -->
+<section id="menu-section">
+  <div class="wrap center">
+    <h2 class="reveal">Pilih Rasa Favoritmu</h2>
+    <p class="lead reveal">Tiga varian isian ayam suwir dan sosis, semuanya gurih dan mengenyangkan.</p>
+    <div class="grid3" id="menuGrid" style="text-align:left"></div>
+    <p class="note reveal">Semua varian hanya Rp10.000</p>
+  </div>
+</section>
+
+<!-- 3. ABOUT -->
+<section class="about" id="about">
+  <div class="wrap about-grid">
+    <div class="reveal">
+      <h2>Tentang Nasi Cokot</h2>
+      <p>Nasi Cokot adalah inovasi kuliner praktis siap santap berbentuk bulat dengan isian ayam suwir bumbu gurih. Dikemas secara higienis dan dirancang agar mudah dibawa, produk ini menjadi solusi sempurna, baik sebagai makanan praktis pengganti makan berat yang mengenyangkan maupun pengganjal lapar yang efektif di tengah padatnya aktivitas harian.</p>
+      <ul class="perks">
+        <li><span class="ico">🎒</span>Praktis dibawa</li>
+        <li><span class="ico">🧼</span>Higienis</li>
+        <li><span class="ico">🍚</span>Mengenyangkan</li>
+        <li><span class="ico">💰</span>Harga terjangkau</li>
+      </ul>
+    </div>
+    <!-- GANTI gambar about: isi CONFIG.aboutImage -->
+    <div class="about-img reveal" id="aboutArt" role="img" aria-label="Ilustrasi Nasi Cokot"></div>
+  </div>
+</section>
+
+<!-- 4. TESTIMONI -->
+<section id="testimoni">
+  <div class="wrap center">
+    <h2 class="reveal">Kata Mereka tentang Nasi Cokot</h2>
+    <p class="lead reveal">Geser untuk melihat cerita pelanggan.</p>
+    <div class="slider" id="slider" style="text-align:left"></div>
+  </div>
+</section>
+
+<!-- 5. CONTACT -->
+<section class="about" id="contact">
+  <div class="wrap center">
+    <h2 class="reveal">Yuk Pesan Sekarang!</h2>
+    <p class="lead reveal">Pesananmu langsung kami proses. Hubungi lewat WhatsApp atau Instagram.</p>
+    <div class="contact-grid" style="text-align:left">
+      <div class="card ch reveal">
+        <span class="ico">💬</span><h3>WhatsApp</h3>
+        <p>+62 857-7117-2690</p>
+        <a class="btn btn-main" data-wa="Halo, saya mau pesan Nasi Cokot" href="#" target="_blank" rel="noopener">Chat Sekarang</a>
+      </div>
+      <div class="card ch reveal">
+        <span class="ico">📸</span><h3>Instagram</h3>
+        <p>@nasi.cokotine</p>
+        <a class="btn btn-alt" id="igBtn" href="#" target="_blank" rel="noopener">Kunjungi Instagram</a>
+      </div>
+      <form class="card contact-form-wrap reveal" id="waForm">
+        <h3>Kirim pesan langsung</h3>
+        <div><label for="fn">Nama</label><input id="fn" required autocomplete="name" placeholder="Nama kamu"></div>
+        <div><label for="fm">Pesan</label><textarea id="fm" rows="3" required placeholder="Contoh: pesan 3 Nasi Cokot Ayam Kemangi"></textarea></div>
+        <button class="btn btn-main" type="submit" style="justify-self:start">Kirim lewat WhatsApp</button>
+      </form>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <p style="font:800 1.4rem var(--fd)">Nasi Cokot</p>
+    <p><a id="fIg" href="#" target="_blank" rel="noopener">Instagram</a><a data-wa="Halo, saya mau pesan Nasi Cokot" href="#" target="_blank" rel="noopener">WhatsApp</a></p>
+    <p>&copy; <span id="yr"></span> Nasi Cokot. Semua hak dilindungi.</p>
+  </div>
+</footer>
+
+<a class="wa-float" data-wa="Halo, saya mau pesan Nasi Cokot" href="#" target="_blank" rel="noopener" aria-label="Chat WhatsApp">
+  <svg viewBox="0 0 32 32"><path d="M16 3C9 3 3.4 8.6 3.4 15.5c0 2.3.6 4.4 1.7 6.3L3 29l7.4-1.9a12.5 12.5 0 0 0 5.6 1.4C23 28.5 28.6 22.9 28.6 16S23 3 16 3zm0 22.9c-1.8 0-3.6-.5-5.100-1.400l-.4-.2-4.400 1.100 1.200-4.300-.3-.4a10.300 10.300 0 0 1-1.600-5.500C5.400 9.700 10.200 5.100 16 5.100S26.500 9.800 26.500 15.500 21.800 25.900 16 25.900zm5.700-7.700c-.3-.2-1.900-.9-2.200-1s-.5-.2-.7.200-.8 1-1 1.200-.4.200-.7.100a8.500 8.500 0 0 1-4.200-3.700c-.3-.6.300-.5.900-1.700.1-.2 0-.4 0-.5l-1-2.300c-.3-.6-.5-.5-.7-.5h-.6c-.2 0-.6.100-.9.400s-1.100 1.100-1.100 2.600 1.100 3 1.300 3.200 2.200 3.400 5.400 4.700c2 .8 2.800.9 3.800.7.600-.1 1.900-.8 2.200-1.500s.3-1.400.2-1.500-.3-.2-.6-.4z"/></svg>
+</a>
+
+<script>
+/* ============ KONFIGURASI: edit data di sini ============ */
+const CONFIG = {
+  wa: "6285771172690",
+  instagram: "https://instagram.com/nasi.cokotine",
+  heroImage: "",   // isi URL / data foto untuk mengganti ilustrasi hero
+  aboutImage: "",  // isi URL / data foto untuk bagian About
+  menu: [
+    { name: "Nasi Cokot Ayam Kemangi", price: 10000, bg: "#DDEBC8", fill: "#4F7F3A", image: "",
+      desc: "Ayam suwir wangi daun kemangi yang segar, gurih dan bikin nagih." },
+    { name: "Nasi Cokot Ayam Kecap", price: 10000, bg: "#F4DDB8", fill: "#6B3A1A", image: "",
+      desc: "Ayam suwir manis gurih berbumbu kecap, rasa klasik yang selalu cocok." },
+    { name: "Nasi Cokot Sosis Balado", price: 10000, bg: "#FAD2C0", fill: "#C23B1E", image: "",
+      desc: "Sosis berbumbu balado pedas gurih, pas buat pecinta rasa nendang." }
+  ],
+  /* GANTI dengan testimoni asli pelanggan */
+  testimonials: [
+    { name: "Rina, Karyawan", text: "Praktis banget dibawa ke kantor, tinggal makan di sela rapat tanpa ribet." },
+    { name: "Dimas, Mahasiswa", text: "Ayam suwirnya gurih banget, satu aja udah cukup buat ganjal lapar kuliah." },
+    { name: "Sari, Ibu Rumah Tangga", text: "Harganya terjangkau tapi mengenyangkan. Anak-anak juga suka!" }
+  ]
+};
+/* ======================================================== */
+
+const rp = n => "Rp" + n.toLocaleString("id-ID");
+const waLink = t => `https://wa.me/${CONFIG.wa}?text=${encodeURIComponent(t)}`;
+
+/* Placeholder gambar: nasi bulat isi ayam suwir (SVG). Dipakai kalau foto belum diisi */
+function riceBall(fill) {
+  const strands = [[-34,-6,-8,10],[-20,14,10,-2],[2,-18,26,0],[-6,24,22,10],[20,-8,36,12],[-30,22,-10,34]]
+    .map(([a,b,c,d]) => `<path d="M${100+a} ${100+b}Q${100+(a+c)/2} ${100+b-8} ${100+c} ${100+d}" stroke="${fill}" stroke-width="7" stroke-linecap="round" fill="none"/>`).join("");
+  return `<svg viewBox="0 0 200 200" aria-hidden="true"><ellipse cx="100" cy="184" rx="62" ry="9" fill="rgba(80,40,10,.18)"/><circle cx="100" cy="98" r="80" fill="#FFFDF5" stroke="#E8D5A8" stroke-width="4"/><circle cx="100" cy="100" r="46" fill="#FBE3B0"/>${strands}<g fill="#E8D5A8"><ellipse cx="44" cy="70" rx="5" ry="2.500" transform="rotate(30 44 70)"/><ellipse cx="156" cy="124" rx="5" ry="2.500" transform="rotate(-25 156 124)"/><ellipse cx="62" cy="156" rx="5" ry="2.500"/><ellipse cx="140" cy="52" rx="5" ry="2.500" transform="rotate(50 140 52)"/></g></svg>`;
+}
+const visual = (src, alt, fill) => src ? `<img src="${src}" alt="${alt}" loading="lazy">` : riceBall(fill);
+
+// Gambar
+document.getElementById("heroArt").innerHTML = visual(CONFIG.heroImage, "Nasi Cokot", "#6B3A1A");
+document.getElementById("aboutArt").innerHTML = visual(CONFIG.aboutImage, "Nasi Cokot", "#6B3A1A");
+
+// Menu
+document.getElementById("menuGrid").innerHTML = CONFIG.menu.map((m, i) => `
+  <article class="card dish reveal" style="transition-delay:${i*90}ms">
+    <div class="dish-img" style="background:${m.bg}">${visual(m.image, m.name, m.fill)}</div>
+    <div class="dish-body">
+      <h3>${m.name}</h3><p>${m.desc}</p>
+      <div class="price">${rp(m.price)}</div>
+      <a class="btn btn-main" style="justify-content:center" target="_blank" rel="noopener" href="${waLink("Halo, saya mau pesan " + m.name)}">Pesan</a>
+    </div>
+  </article>`).join("");
+
+// Testimoni
+document.getElementById("slider").innerHTML = CONFIG.testimonials.map((t, i) => `
+  <figure class="card testi reveal" style="margin:0;transition-delay:${i*90}ms">
+    <div class="quote" aria-hidden="true">&ldquo;</div>
+    <p>${t.text}</p>
+    <div class="stars" aria-label="Rating 5 dari 5">★★★★★</div>
+    <div class="who">${t.name}</div>
+  </figure>`).join("");
+
+// Link WhatsApp & Instagram
+document.querySelectorAll("[data-wa]").forEach(a => a.href = waLink(a.dataset.wa));
+document.getElementById("igBtn").href = CONFIG.instagram;
+document.getElementById("fIg").href = CONFIG.instagram;
+document.getElementById("yr").textContent = new Date().getFullYear();
+
+// Form -> WhatsApp
+document.getElementById("waForm").addEventListener("submit", e => {
+  e.preventDefault();
+  const n = document.getElementById("fn").value.trim(), m = document.getElementById("fm").value.trim();
+  window.open(waLink(`Halo, saya ${n}. ${m}`), "_blank", "noopener");
+});
+
+// Hamburger
+const burger = document.getElementById("burger"), menu = document.getElementById("menu");
+burger.addEventListener("click", () => {
+  const open = menu.classList.toggle("open");
+  burger.setAttribute("aria-expanded", open);
+});
+menu.addEventListener("click", e => { if (e.target.tagName === "A") { menu.classList.remove("open"); burger.setAttribute("aria-expanded", false); } });
+
+// Muncul saat scroll
+const io = new IntersectionObserver(es => es.forEach(x => { if (x.isIntersecting) { x.target.classList.add("in"); io.unobserve(x.target); } }), { threshold: .15 });
+document.querySelectorAll(".reveal").forEach(el => io.observe(el));
+</script>
+</body>
+</html>
