@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Nasi Cokot - Praktis, Gurih, Bikin Kenyang</title>
-<meta name="description" content="Nasi Cokot: nasi bulat siap santap isi ayam suwir bumbu gurih. Higienis, mudah dibawa, hanya Rp10.000. Pesan via WhatsApp.">
+<meta name="description" content="Nasi Cokot: nasi bulat siap santap isi ayam suwir bumbu gurih. Open PO Selasa-Jumat, ready setiap Senin. Sekali cokot langsung ketagihan!">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Nasi Cokot - Praktis, Gurih, Bikin Kenyang">
 <meta property="og:description" content="Nasi bulat isi ayam suwir bumbu gurih. Siap santap, mudah dibawa, Rp10.000.">
@@ -40,7 +40,9 @@ section{padding:72px 0}
 /* Navbar */
 nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:50;background:var(--bg);border-bottom:1px solid var(--line)}
 .nav-in{display:flex;align-items:center;justify-content:space-between;height:64px}
-.logo{font:800 1.5rem var(--fd);text-decoration:none;color:var(--orange-d)}
+.logo{display:inline-flex;align-items:center;gap:10px;font:800 1.5rem var(--fd);text-decoration:none;color:var(--orange-d)}
+.brand-mark{position:relative;flex:none;width:42px;height:42px;overflow:hidden;border-radius:50%;background:var(--yellow)}
+.brand-mark img{position:absolute;top:-15px;left:50%;width:126px;height:126px;max-width:none;transform:translateX(-50%)}
 .menu{display:none;list-style:none;margin:0;padding:0;gap:6px}
 .menu a{display:block;padding:8px 14px;border-radius:99px;text-decoration:none;font-weight:700}
 .menu a:hover{background:var(--line)}
@@ -60,8 +62,14 @@ nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:50;background:var(-
 @media(prefers-color-scheme:dark){:root:not([data-theme="light"]) .btn-alt{color:var(--yellow);border-color:var(--yellow)}}
 
 /* Hero */
-.hero{padding:40px 0 64px;background-image:linear-gradient(90deg,rgba(255,244,220,.96) 0%,rgba(255,244,220,.84) 42%,rgba(255,244,220,.12) 72%,rgba(255,244,220,0) 100%),url("images/hero.png");background-position:center;background-size:cover;background-repeat:no-repeat}
+.hero{position:relative;isolation:isolate;padding:40px 0 64px;background-image:linear-gradient(90deg,rgba(255,244,220,.96) 0%,rgba(255,244,220,.84) 42%,rgba(255,244,220,.12) 72%,rgba(255,244,220,0) 100%),url("images/hero.png");background-position:center;background-size:cover;background-repeat:no-repeat}
+.hero::after{position:absolute;z-index:-1;right:8%;top:14%;width:90px;height:90px;border:14px solid rgba(240,138,36,.22);border-radius:50%;content:""}
 .hero-grid{display:grid;gap:32px;align-items:center;min-height:540px}
+.hero-copy{padding-top:36px}
+.tagline{margin:12px 0 0;color:var(--orange-d);font:800 clamp(1.25rem,3vw,1.8rem)/1.2 var(--fd);letter-spacing:.01em}
+.po-badge{display:inline-flex;align-items:center;gap:10px;margin-top:26px;padding:12px 18px;border:1px solid var(--line);border-radius:18px;background:var(--surface);box-shadow:var(--shadow);font-weight:700}
+.po-badge strong{color:var(--orange-d)}
+.po-dot{width:12px;height:12px;flex:none;border-radius:50%;background:var(--green);box-shadow:0 0 0 5px rgba(79,127,58,.14)}
 /* .hero h1{font-size:clamp(2.5rem,9vw,4.4rem);font-weight:800} */
 .hero p{color:var(--muted);font-size:1.15rem;max-width:44ch;margin:16px 0 28px}
 .cta{display:flex;flex-wrap:wrap;gap:12px}
@@ -90,8 +98,10 @@ nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:50;background:var(-
 @media(min-width:800px){.about-grid{grid-template-columns:1fr 1fr}}
 .about-img{background:var(--yellow);border-radius:32px;padding:30px;display:grid;place-items:center}
 .about-img svg,.about-img img{width:70%;height:auto}
-.perks{list-style:none;margin:26px 0 0;padding:0;display:grid;gap:14px;grid-template-columns:1fr 1fr}
-.perks li{display:flex;gap:12px;align-items:center;font-weight:700;line-height:1.3}
+.perks{list-style:none;margin:30px 0 0;padding:0;display:grid;gap:16px;grid-template-columns:repeat(2,minmax(0,1fr))}
+.perks li{min-height:138px;padding:18px;display:flex;flex-direction:column;justify-content:center;gap:10px;border:1px solid var(--line);border-radius:22px;background:var(--bg);box-shadow:var(--shadow);font-size:1.05rem;font-weight:800;line-height:1.25;transition:transform .2s,background .2s}
+.perks li:hover{transform:translateY(-4px);background:var(--surface)}
+.perks .ico{width:56px;height:56px;border-radius:18px;background:var(--yellow);font-size:1.8rem}
 .ico{flex:none;width:46px;height:46px;border-radius:14px;background:var(--bg);display:grid;place-items:center;font-size:1.4rem}
 
 /* Testimoni: slider geser di mobile, 3 kolom di desktop */
@@ -118,6 +128,10 @@ input,textarea{width:100%;padding:12px 14px;border-radius:14px;border:1.5px soli
 footer{background:var(--text);color:var(--bg);padding:36px 0;text-align:center}
 footer a{margin:0 10px;font-weight:700}
 footer p{margin:6px 0}
+footer .footer-brand{display:flex;align-items:center;justify-content:center;gap:10px;margin-bottom:12px;font:800 1.4rem var(--fd)}
+footer .brand-mark{width:38px;height:38px}
+footer .brand-mark img{top:-13px;width:114px;height:114px}
+footer .footer-email{display:inline-block;margin:4px 0 8px}
 
 /* WhatsApp mengambang */
 .wa-float{position:fixed;right:18px;bottom:calc(18px + env(safe-area-inset-bottom,0px));z-index:60;width:58px;height:58px;border-radius:50%;background:#25D366;display:grid;place-items:center;box-shadow:0 6px 18px rgba(0,0,0,.3);transition:transform .2s}
@@ -142,7 +156,7 @@ footer p{margin:6px 0}
 
 <nav aria-label="Navigasi utama">
   <div class="wrap nav-in">
-    <a href="#home" class="logo">Nasi Cokot</a>
+    <a href="#home" class="logo"><span class="brand-mark"><img src="images/logo.png" alt=""></span><span>Nasi Cokot</span></a>
     <button class="burger" id="burger" aria-label="Buka menu" aria-expanded="false" aria-controls="menu"><span></span><span></span><span></span></button>
     <ul class="menu" id="menu">
       <li><a href="#home">Home</a></li>
@@ -158,9 +172,11 @@ footer p{margin:6px 0}
 <!-- 1. HOME -->
 <section class="hero" id="home">
   <div class="wrap hero-grid">
-    <div>
+    <div class="hero-copy">
       <h1>Praktis, Gurih, Bikin Kenyang!</h1>
+      <p class="tagline">Sekali cokot langsung ketagihan</p>
       <p>Nasi bulat isi ayam suwir bumbu gurih. Siap santap, mudah dibawa, cocok buat kamu yang sibuk.</p>
+      <div class="po-badge"><span class="po-dot" aria-hidden="true"></span><span><strong>Open PO Selasa–Jumat</strong><br>Ready setiap hari Senin</span></div>
       <div class="cta">
         <a class="btn btn-main" data-wa="Halo, saya mau pesan Nasi Cokot" href="#" target="_blank" rel="noopener">Pesan via WhatsApp</a>
         <a class="btn btn-alt" href="#menu-section">Lihat Menu</a>
@@ -236,8 +252,9 @@ footer p{margin:6px 0}
 
 <footer>
   <div class="wrap">
-    <p style="font:800 1.4rem var(--fd)">Nasi Cokot</p>
+    <p class="footer-brand"><span class="brand-mark"><img src="images/logo.png" alt=""></span><span>Nasi Cokot</span></p>
     <p><a id="fIg" href="#" target="_blank" rel="noopener">Instagram</a><a data-wa="Halo, saya mau pesan Nasi Cokot" href="#" target="_blank" rel="noopener">WhatsApp</a></p>
+    <p><a class="footer-email" href="mailto:nasicokotin@gmail.com">nasicokotin@gmail.com</a></p>
     <p>&copy; <span id="yr"></span> Nasi Cokot. Semua hak dilindungi.</p>
   </div>
 </footer>
@@ -264,9 +281,10 @@ const CONFIG = {
   ],
   /* GANTI dengan testimoni asli pelanggan */
   testimonials: [
-    { name: "Rina, Karyawan", text: "Praktis banget dibawa ke kantor, tinggal makan di sela rapat tanpa ribet." },
-    { name: "Dimas, Mahasiswa", text: "Ayam suwirnya gurih banget, satu aja udah cukup buat ganjal lapar kuliah." },
-    { name: "Sari, Ibu Rumah Tangga", text: "Harganya terjangkau tapi mengenyangkan. Anak-anak juga suka!" }
+    { name: "Nawang Wulan", text: "Untuk nasi Cokot enak banget rasanya gurih-gurih pedes gitu ya menurut ku enakk banget poll🤤" },
+    { name: "Farisa Aulia", text: "Enakk bngttt sih nasi cokotnyaaa nasinya tu pulenn, sosisnya gede' rasanyaaa pas pokoknya balance semuanya" },
+    { name: "Abhi Seka", text: "Nasinya pulen, ayam suwirnya gurih dan bumbunya berasa praktis banget dimakan Cocok buat yang lagi buru-buru tapi tetap mau makan enak" },
+    { name: "Muthia Qulaibah", text: "nasi cokotnya enak bangett nasinya banyak dan ayam kemanginya bener bener berasa kemanginya dan harganya juga murah cuma 10 ribu bener bener worth it." }
   ]
 };
 /* ======================================================== */
