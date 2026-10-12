@@ -46,6 +46,7 @@ nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:50;background:var(-
 .menu{display:none;list-style:none;margin:0;padding:0;gap:6px}
 .menu a{display:block;padding:8px 14px;border-radius:99px;text-decoration:none;font-weight:700}
 .menu a:hover{background:var(--line)}
+.menu a[aria-current="location"]{background:var(--orange);color:#fff}
 .burger{background:none;border:0;width:44px;height:44px;cursor:pointer;color:var(--text)}
 .burger span{display:block;width:24px;height:3px;margin:5px auto;background:currentColor;border-radius:3px;transition:.25s}
 .burger[aria-expanded=true] span:nth-child(1){transform:translateY(8px) rotate(45deg)}
@@ -118,10 +119,11 @@ nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:50;background:var(-
 @media(max-width:360px){.perks{grid-template-columns:1fr}.perks li{min-height:78px}}
 .ico{flex:none;width:46px;height:46px;border-radius:14px;background:var(--bg);display:grid;place-items:center;font-size:1.4rem}
 
-/* Testimoni: slider geser di mobile, 3 kolom di desktop */
-.slider{display:flex;gap:18px;overflow-x:auto;scroll-snap-type:x mandatory;padding:6px 4px 22px;-webkit-overflow-scrolling:touch}
+/* Testimoni: geser horizontal di semua ukuran layar */
+.slider{display:flex;gap:18px;overflow-x:auto;overflow-y:hidden;scroll-snap-type:x mandatory;scrollbar-color:var(--orange) var(--line);padding:6px 4px 22px;-webkit-overflow-scrolling:touch;cursor:grab}
+.slider.is-dragging{cursor:grabbing;scroll-snap-type:none;user-select:none}
 .slider>.card{flex:0 0 84%;scroll-snap-align:center}
-@media(min-width:800px){.slider{display:grid;grid-template-columns:repeat(3,1fr);overflow:visible}.slider>.card{flex:auto}}
+@media(min-width:800px){.slider>.card{flex:0 0 min(32%,360px)}}
 .testi{padding:26px}
 .quote{font:800 3.4rem/0.6 var(--fd);color:var(--orange)}
 .testi p{margin:10px 0 16px}
@@ -228,7 +230,7 @@ footer .footer-email{display:inline-block;margin:4px 0 8px}
   <div class="wrap center">
     <h2 class="reveal">Kata Mereka tentang Nasi Cokot</h2>
     <p class="lead reveal">Geser untuk melihat cerita pelanggan.</p>
-    <div class="slider" id="slider" style="text-align:left"></div>
+    <div class="slider" id="slider" role="region" aria-label="Ulasan pelanggan, geser ke samping untuk melihat semua ulasan" tabindex="0" style="text-align:left"></div>
   </div>
 </section>
 
@@ -297,11 +299,11 @@ const CONFIG = {
   heroImage: IMG.hero,   // isi URL / data foto untuk mengganti ilustrasi hero
   aboutImage: IMG.about,  // isi URL / data foto untuk bagian About
   menu: [
-    { name: "Nasi Cokot Ayam Kemangi", price: 10000, bg: "#DDEBC8", fill: "#4F7F3A", image: IMG.menu,
+    { name: "Nasi Cokot Ayam Kemangi", price: 10000, bg: "#DDEBC8", fill: "#4F7F3A", image: "images/nasi%20cokot%20ayam%20kemangi.jpeg",
       desc: "Ayam suwir wangi daun kemangi yang segar, gurih dan bikin nagih." },
-    { name: "Nasi Cokot Ayam Kecap", price: 10000, bg: "#F4DDB8", fill: "#6B3A1A", image: IMG.menu,
+    { name: "Nasi Cokot Ayam Kecap", price: 10000, bg: "#F4DDB8", fill: "#6B3A1A", image: "images/nasi%20cokot%20ayam%20kecap.jpeg",
       desc: "Ayam suwir manis gurih berbumbu kecap, rasa klasik yang selalu cocok." },
-    { name: "Nasi Cokot Sosis Balado", price: 10000, bg: "#FAD2C0", fill: "#C23B1E", image: IMG.menu,
+    { name: "Nasi Cokot Sosis Balado", price: 10000, bg: "#FAD2C0", fill: "#C23B1E", image: "images/nasi%20cokot%20sosis.jpeg",
       desc: "Sosis berbumbu balado pedas gurih, pas buat pecinta rasa nendang." }
   ],
   /* GANTI dengan testimoni asli pelanggan */
@@ -369,6 +371,53 @@ burger.addEventListener("click", () => {
   burger.setAttribute("aria-expanded", open);
 });
 menu.addEventListener("click", e => { if (e.target.tagName === "A") { menu.classList.remove("open"); burger.setAttribute("aria-expanded", false); } });
+
+// Tandai navigasi sesuai section yang sedang dibaca.
+const navLinks = [...menu.querySelectorAll("a")];
+const sections = [...document.querySelectorAll("main section[id]")];
+const updateActiveNav = () => {
+  const marker = window.scrollY + document.querySelector("nav").offsetHeight + 80;
+  let activeSection = sections[0];
+  sections.forEach(section => {
+    if (section.getBoundingClientRect().top + window.scrollY <= marker) activeSection = section;
+  });
+  navLinks.forEach(link => {
+    if (link.hash === `#${activeSection.id}`) link.setAttribute("aria-current", "location");
+    else link.removeAttribute("aria-current");
+  });
+};
+let navUpdatePending = false;
+window.addEventListener("scroll", () => {
+  if (navUpdatePending) return;
+  navUpdatePending = true;
+  window.requestAnimationFrame(() => {
+    updateActiveNav();
+    navUpdatePending = false;
+  });
+}, { passive: true });
+window.addEventListener("resize", updateActiveNav);
+updateActiveNav();
+
+// Drag dengan mouse di desktop; sentuhan dan keyboard memakai scroll native.
+const slider = document.getElementById("slider");
+let dragStartX = 0, dragStartScroll = 0;
+slider.addEventListener("pointerdown", e => {
+  if (e.pointerType !== "mouse" || e.button !== 0) return;
+  dragStartX = e.clientX;
+  dragStartScroll = slider.scrollLeft;
+  slider.classList.add("is-dragging");
+  slider.setPointerCapture(e.pointerId);
+});
+slider.addEventListener("pointermove", e => {
+  if (!slider.classList.contains("is-dragging")) return;
+  slider.scrollLeft = dragStartScroll - (e.clientX - dragStartX);
+});
+const stopSliderDrag = e => {
+  slider.classList.remove("is-dragging");
+  if (slider.hasPointerCapture(e.pointerId)) slider.releasePointerCapture(e.pointerId);
+};
+slider.addEventListener("pointerup", stopSliderDrag);
+slider.addEventListener("pointercancel", stopSliderDrag);
 
 // Muncul saat scroll
 const io = new IntersectionObserver(es => es.forEach(x => { if (x.isIntersecting) { x.target.classList.add("in"); io.unobserve(x.target); } }), { threshold: .15 });
