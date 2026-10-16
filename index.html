@@ -63,9 +63,11 @@ nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:50;background:var(-
 @media(prefers-color-scheme:dark){:root:not([data-theme="light"]) .btn-alt{color:var(--yellow);border-color:var(--yellow)}}
 
 /* Hero */
-.hero{position:relative;isolation:isolate;padding:40px 0 64px;background-color:#F6B477;background-image:linear-gradient(90deg,#F6B477 0%,rgba(246,180,119,.92) 42%,rgba(246,180,119,.32) 72%,rgba(246,180,119,.08) 100%),url("images/hero.png");background-position:center;background-size:cover;background-repeat:no-repeat}
-.hero::after{position:absolute;z-index:-1;right:8%;top:14%;width:90px;height:90px;border:14px solid rgba(240,138,36,.22);border-radius:50%;content:""}
-.hero-grid{display:grid;gap:32px;align-items:center;min-height:540px}
+.hero{position:relative;isolation:isolate;padding:40px 0 64px;background-color:#F6B477}
+.hero-background{position:absolute;inset:0;z-index:-2;width:100%;height:100%;object-fit:cover;object-position:center}
+.hero::before{position:absolute;z-index:-1;inset:0;background:linear-gradient(90deg,#F6B477 0%,rgba(246,180,119,.92) 42%,rgba(246,180,119,.32) 72%,rgba(246,180,119,.08) 100%);content:""}
+.hero::after{position:absolute;z-index:0;right:8%;top:14%;width:90px;height:90px;border:14px solid rgba(240,138,36,.22);border-radius:50%;content:""}
+.hero-grid{position:relative;z-index:1;display:grid;gap:32px;align-items:center;min-height:540px}
 .hero-copy{padding-top:36px}
 .hero h1{font-size:clamp(2.4rem,8vw,4.5rem);font-weight:800;letter-spacing:-.02em}
 .tagline{margin:12px 0 0;color:black;font:800 clamp(1.25rem,3vw,1.8rem)/1.2 var(--fd);letter-spacing:.01em}
@@ -186,15 +188,16 @@ footer .footer-email{display:inline-block;margin:4px 0 8px}
 <main>
 <!-- 1. HOME -->
 <section class="hero" id="home">
+  <img class="hero-background" src="images/hero.png" alt="" aria-hidden="true">
   <div class="wrap hero-grid">
     <div class="hero-copy">
       <h1 style="font-size: 65px;">Praktis, Gurih, Bikin Kenyang!</h1>
       <p class="tagline" style="font-size: 25px;">Sekali cokot langsung ketagihan</p>
-      <p style="font-size: 20px;">Nasi bulat isi ayam suwir bumbu gurih. Siap santap, mudah dibawa, cocok buat kamu yang sibuk.</p>
+      <p style="font-size: 23px;">Nasi bulat isi ayam suwir bumbu gurih. Siap santap, mudah dibawa, cocok buat kamu yang sibuk.</p>
       <div class="cta">
       </div>
     </div>
-    <div class="hero-art" id="heroArt" role="img" aria-label="Nasi Cokot berbentuk bulat isi ayam suwir"></div>
+    <div class="hero-art"><img src="images/hero.png" alt="Nasi Cokot berbentuk bulat isi ayam suwir"></div>
   </div>
 </section>
 
@@ -203,7 +206,32 @@ footer .footer-email{display:inline-block;margin:4px 0 8px}
   <div class="wrap center">
     <h2 class="reveal">Pilih Rasa Favoritmu</h2>
     <p class="lead reveal">Tiga varian isian ayam suwir dan sosis, semuanya gurih dan mengenyangkan.</p>
-    <div class="grid3" id="menuGrid" style="text-align:left"></div>
+    <div class="grid3" style="text-align:left">
+      <article class="card dish reveal">
+        <div class="dish-img" style="background:#DDEBC8"><img src="images/nasi%20cokot%20ayam%20kemangi.jpeg" alt="Nasi Cokot Ayam Kemangi" loading="lazy"></div>
+        <div class="dish-body">
+          <h3>Nasi Cokot Ayam Kemangi</h3><p>Ayam suwir wangi daun kemangi yang segar, gurih dan bikin nagih.</p>
+          <div class="price">Rp10.000</div>
+          <a class="btn btn-main" style="justify-content:center" data-wa="Halo, saya mau pesan Nasi Cokot Ayam Kemangi" href="#" target="_blank" rel="noopener">Pesan</a>
+        </div>
+      </article>
+      <article class="card dish reveal">
+        <div class="dish-img" style="background:#F4DDB8"><img src="images/nasi%20cokot%20ayam%20kecap.jpeg" alt="Nasi Cokot Ayam Kecap" loading="lazy"></div>
+        <div class="dish-body">
+          <h3>Nasi Cokot Ayam Kecap</h3><p>Ayam suwir manis gurih berbumbu kecap, rasa klasik yang selalu cocok.</p>
+          <div class="price">Rp10.000</div>
+          <a class="btn btn-main" style="justify-content:center" data-wa="Halo, saya mau pesan Nasi Cokot Ayam Kecap" href="#" target="_blank" rel="noopener">Pesan</a>
+        </div>
+      </article>
+      <article class="card dish reveal">
+        <div class="dish-img" style="background:#FAD2C0"><img src="images/nasi%20cokot%20sosis.jpeg" alt="Nasi Cokot Sosis Balado" loading="lazy"></div>
+        <div class="dish-body">
+          <h3>Nasi Cokot Sosis Balado</h3><p>Sosis berbumbu balado pedas gurih, pas buat pecinta rasa nendang.</p>
+          <div class="price">Rp10.000</div>
+          <a class="btn btn-main" style="justify-content:center" data-wa="Halo, saya mau pesan Nasi Cokot Sosis Balado" href="#" target="_blank" rel="noopener">Pesan</a>
+        </div>
+      </article>
+    </div>
   </div>
 </section>
 
@@ -211,7 +239,7 @@ footer .footer-email{display:inline-block;margin:4px 0 8px}
 <section class="about" id="about">
   <div class="wrap about-grid">
     <div class="reveal">
-      <h2>Tentang Nasi Cokot</h2>
+      <h2 class=" reveral" style="font-family: timesnewroment;">Tentang Nasi Cokot</h2>
       <p>Nasi Cokot adalah inovasi kuliner praktis siap santap berbentuk bulat dengan isian ayam suwir bumbu gurih. Dikemas secara higienis dan dirancang agar mudah dibawa, produk ini menjadi solusi sempurna, baik sebagai makanan praktis pengganti makan berat yang mengenyangkan maupun pengganjal lapar yang efektif di tengah padatnya aktivitas harian.</p>
       <ul class="perks">
         <li><span class="ico">🎒</span>Praktis dibawa</li>
@@ -220,8 +248,7 @@ footer .footer-email{display:inline-block;margin:4px 0 8px}
         <li><span class="ico">💰</span>Harga terjangkau</li>
       </ul>
     </div>
-    <!-- GANTI gambar about: isi CONFIG.aboutImage -->
-    <div class="about-img reveal" id="aboutArt" role="img" aria-label="Ilustrasi Nasi Cokot"></div>
+    <div class="about-img reveal"><img src="images/about.png" alt="Nasi Cokot"></div>
   </div>
 </section>
 
@@ -229,7 +256,7 @@ footer .footer-email{display:inline-block;margin:4px 0 8px}
 <section id="testimoni">
   <div class="wrap center">
     <h2 class="reveal">Kata Mereka tentang Nasi Cokot</h2>
-    <p class="lead reveal">Geser untuk melihat cerita pelanggan.</p>
+    <p class="lead reveal" style="font-size: 23px;">Geser untuk melihat cerita pelanggan.</p>
     <div class="slider" id="slider" role="region" aria-label="Ulasan pelanggan, geser ke samping untuk melihat semua ulasan" tabindex="0" style="text-align:left"></div>
   </div>
 </section>
@@ -292,20 +319,9 @@ footer .footer-email{display:inline-block;margin:4px 0 8px}
 
 <script>
 /* ============ KONFIGURASI: edit data di sini ============ */
-const IMG = {hero:"images/hero.png", about:"images/about.png", menu:"images/menu.jpg"}; // aset gambar lokal
 const CONFIG = {
   wa: "6285771172690",
   instagram: "https://instagram.com/nasi.cokotine",
-  heroImage: IMG.hero,   // isi URL / data foto untuk mengganti ilustrasi hero
-  aboutImage: IMG.about,  // isi URL / data foto untuk bagian About
-  menu: [
-    { name: "Nasi Cokot Ayam Kemangi", price: 10000, bg: "#DDEBC8", fill: "#4F7F3A", image: "images/nasi%20cokot%20ayam%20kemangi.jpeg",
-      desc: "Ayam suwir wangi daun kemangi yang segar, gurih dan bikin nagih." },
-    { name: "Nasi Cokot Ayam Kecap", price: 10000, bg: "#F4DDB8", fill: "#6B3A1A", image: "images/nasi%20cokot%20ayam%20kecap.jpeg",
-      desc: "Ayam suwir manis gurih berbumbu kecap, rasa klasik yang selalu cocok." },
-    { name: "Nasi Cokot Sosis Balado", price: 10000, bg: "#FAD2C0", fill: "#C23B1E", image: "images/nasi%20cokot%20sosis.jpeg",
-      desc: "Sosis berbumbu balado pedas gurih, pas buat pecinta rasa nendang." }
-  ],
   /* GANTI dengan testimoni asli pelanggan */
   testimonials: [
     { name: "Nawang Wulan", text: "Untuk nasi Cokot enak banget rasanya gurih-gurih pedes gitu ya menurut ku enakk banget poll🤤" },
@@ -316,31 +332,7 @@ const CONFIG = {
 };
 /* ======================================================== */
 
-const rp = n => "Rp" + n.toLocaleString("id-ID");
 const waLink = t => `https://wa.me/${CONFIG.wa}?text=${encodeURIComponent(t)}`;
-
-/* Placeholder gambar: nasi bulat isi ayam suwir (SVG). Dipakai kalau foto belum diisi */
-function riceBall(fill) {
-  const strands = [[-34,-6,-8,10],[-20,14,10,-2],[2,-18,26,0],[-6,24,22,10],[20,-8,36,12],[-30,22,-10,34]]
-    .map(([a,b,c,d]) => `<path d="M${100+a} ${100+b}Q${100+(a+c)/2} ${100+b-8} ${100+c} ${100+d}" stroke="${fill}" stroke-width="7" stroke-linecap="round" fill="none"/>`).join("");
-  return `<svg viewBox="0 0 200 200" aria-hidden="true"><ellipse cx="100" cy="184" rx="62" ry="9" fill="rgba(80,40,10,.18)"/><circle cx="100" cy="98" r="80" fill="#FFFDF5" stroke="#E8D5A8" stroke-width="4"/><circle cx="100" cy="100" r="46" fill="#FBE3B0"/>${strands}<g fill="#E8D5A8"><ellipse cx="44" cy="70" rx="5" ry="2.500" transform="rotate(30 44 70)"/><ellipse cx="156" cy="124" rx="5" ry="2.500" transform="rotate(-25 156 124)"/><ellipse cx="62" cy="156" rx="5" ry="2.500"/><ellipse cx="140" cy="52" rx="5" ry="2.500" transform="rotate(50 140 52)"/></g></svg>`;
-}
-const visual = (src, alt, fill) => src ? `<img src="${src}" alt="${alt}" loading="lazy">` : riceBall(fill);
-
-// Gambar
-document.getElementById("heroArt").innerHTML = visual(CONFIG.heroImage, "Nasi Cokot", "#6B3A1A");
-document.getElementById("aboutArt").innerHTML = visual(CONFIG.aboutImage, "Nasi Cokot", "#6B3A1A");
-
-// Menu
-document.getElementById("menuGrid").innerHTML = CONFIG.menu.map((m, i) => `
-  <article class="card dish reveal" style="transition-delay:${i*90}ms">
-    <div class="dish-img" style="background:${m.bg}">${visual(m.image, m.name, m.fill)}</div>
-    <div class="dish-body">
-      <h3>${m.name}</h3><p>${m.desc}</p>
-      <div class="price">${rp(m.price)}</div>
-      <a class="btn btn-main" style="justify-content:center" target="_blank" rel="noopener" href="${waLink("Halo, saya mau pesan " + m.name)}">Pesan</a>
-    </div>
-  </article>`).join("");
 
 // Testimoni
 document.getElementById("slider").innerHTML = CONFIG.testimonials.map((t, i) => `
